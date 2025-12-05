@@ -20,6 +20,9 @@ export default function HomePage() {
                     </p>
 
                     <div className="hero-buttons mt-4">
+                        <a href="/presentation" className="btn btn-primary btn-lg me-3">
+                            <i className="fas fa-play me-2"></i>Conseils pratiques
+                        </a>
                         <a href="/simulation" className="btn btn-primary btn-lg me-3">
                             <i className="fas fa-play me-2"></i>Démarrer la Simulation
                         </a>
