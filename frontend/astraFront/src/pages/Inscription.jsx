@@ -19,14 +19,14 @@ const Inscription = () => {
     e.preventDefault();
     setErreur("");
 
-    const ok = await register(nom, mail, password, type);
-    if (!ok) {
-      setErreur("Erreur lors de l'inscription.");
-      return;
+    const result = await register(nom, mail, password, type);
+    if (!result.success) {
+        setErreur(result.message);
+        return;
     }
-    // après inscription, on peut envoyer sur /connexion
+
     navigate("/connexion");
-  };
+    };
 
   return (
     <div style={{ height: '120vh', width: '100vw', overflowX: 'hidden', backgroundColor: "#000", color: "#fff" }}>

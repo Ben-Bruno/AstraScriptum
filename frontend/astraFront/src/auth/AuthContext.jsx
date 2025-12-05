@@ -1,9 +1,10 @@
 // cspell:disable
 import { createContext, useContext, useState, useEffect } from "react";
+import { VITE_API_URL } from "../environement.env"
 
 const AuthContext = createContext(null);
 
-const API_URL = "http://localhost:8080";
+const API_URL = VITE_API_URL;
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
@@ -55,14 +56,20 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ nom, mail, password, type }),
       });
 
-      return res.ok;
+      if (!res.ok) {
+        const data = await res.json();
+        // on renvoie l'erreur au composant
+        return { success: false, message: data.error || "Une erreur est survenue" };
+      }
+
+      return { success: true };
     } catch (e) {
-      console.error("Erreur inscription", e);
-      return false;
+      return { success: false, message: "Impossible de se connecter au serveur" };
     } finally {
       setLoading(false);
     }
   };
+
 
   const logout = () => {
     localStorage.removeItem("jwt");
