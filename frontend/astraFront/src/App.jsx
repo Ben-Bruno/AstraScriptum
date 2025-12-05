@@ -1,18 +1,26 @@
-//cspell:disable
+// cspell:disable
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Acceuil from "./pages/Acceuil";
 import AnimatedPage from "./pages/AnimatedPage";
-
+import Connexion from "./pages/Connexion";
+import Inscription from "./pages/Inscription";
+import { AuthProvider } from "./auth/AuthContext";
 
 const App = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/acceuil' element={<Acceuil />}></Route>
-                <Route path='/Presentation' element={<AnimatedPage />}></Route>
-
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/acceuil" element={<Acceuil />} />
+          <Route path="/presentation" element={<AnimatedPage />} />
+          <Route path="/connexion" element={<Connexion />} />
+          <Route path="/inscription" element={<Inscription />} />
+          {/* route par défaut */}
+          <Route path="*" element={<Acceuil />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 };
+
 export default App;
